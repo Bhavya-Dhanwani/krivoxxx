@@ -1,44 +1,40 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Plus } from 'lucide-react';
 import Container from '@/components/ui/Container';
-import Section from '@/components/ui/Section';
 import { processSteps } from '@/data/process';
 import styles from './Process.module.css';
 
-// Single process step
 function ProcessStep({ step }) {
   return (
-    <motion.div
-      className={styles.step}
-      whileHover={{ y: -4 }}
-    >
+    <motion.div className={styles.step} whileHover={{ y: -5 }}>
       <span className={styles.number}>{step.number}</span>
-      <div className={styles.content}>
-        <h3 className={styles.stepTitle}>{step.title}</h3>
-        <p className={styles.stepDesc}>{step.description}</p>
-      </div>
+      <h3 className={styles.stepTitle}>{step.title}</h3>
+      <p className={styles.stepDesc}>{step.description}</p>
     </motion.div>
   );
 }
 
 export default function Process() {
   return (
-    <Section id="process" variant="default">
+    <section id="process" className={styles.process}>
       <Container>
         <div className={styles.header}>
-          <h2 className={styles.heading}>How we work</h2>
-          <p className={styles.subheading}>
-            A proven process that delivers results, from discovery to optimization.
-          </p>
+          <span className={styles.kicker}>
+            Why Krivoxx <Plus size={14} />
+          </span>
+          <h2>
+            Our Process. Simple, Clear, <span>Effective.</span>
+          </h2>
         </div>
 
-        <div className={styles.grid}>
-          {processSteps.map((step, index) => (
+        <div className={styles.timeline}>
+          {processSteps.map((step) => (
             <ProcessStep key={step.number} step={step} />
           ))}
         </div>
       </Container>
-    </Section>
+    </section>
   );
 }

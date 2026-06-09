@@ -1,66 +1,87 @@
 'use client';
 
-import { ArrowUp } from 'lucide-react';
+import { AtSign, Globe, Link as LinkIcon, X } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import Container from '@/components/ui/Container';
-import { navLinks } from '@/data/navigation';
 import { SITE } from '@/constants';
+import logoSrc from '@/assets/images/logo.png';
 import styles from './Footer.module.css';
 
+const companyLinks = ['About Us', 'Our Process', 'Blog', 'Careers'];
+const serviceLinks = ['Ads Campaigns', 'Website Development', 'Video Production', 'Brand Strategy & Design'];
+const resourceLinks = [
+  { label: 'Privacy Policy', href: '/privacy-policy' },
+  { label: 'Terms & Conditions', href: '/terms-and-conditions' },
+];
+
 export default function Footer() {
-  // Smooth scroll to top
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const pathname = usePathname();
+
+  if (pathname === '/contact') return null;
 
   return (
     <footer className={styles.footer}>
       <Container>
-        <div className={styles.inner}>
-          <div className={styles.top}>
-            <div className={styles.brand}>
-              <a href="#hero" className={styles.logo}>
-                {SITE.name}
-              </a>
-              <p className={styles.tagline}>{SITE.tagline}</p>
-            </div>
-
-            <ul className={styles.links}>
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <a href={link.href} className={styles.link}>
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-
-            <button
-              className={styles.topButton}
-              onClick={scrollToTop}
-              aria-label="Scroll to top"
-            >
-              <ArrowUp size={18} />
-            </button>
-          </div>
-
-          <div className={styles.bottom}>
-            <p className={styles.copyright}>
-              &copy; {new Date().getFullYear()} {SITE.name}. All rights reserved.
+        <div className={styles.grid}>
+          <div className={styles.brand}>
+            <Link href="/" className={styles.logo}>
+              <Image src={logoSrc} alt="Krivoxx" className={styles.logoImg} />
+              <span>
+                <strong>{SITE.name}</strong>
+                <small>Digital Marketing Agency</small>
+              </span>
+            </Link>
+            <p>
+              We help ambitious brands grow through strategy, creativity, and performance.
             </p>
+            <a href={`mailto:${SITE.email}`} className={styles.email}>{SITE.email}</a>
+          </div>
+
+          <FooterColumn title="Company" links={companyLinks} />
+          <FooterColumn title="Services" links={serviceLinks} />
+          <FooterColumn title="Resources" links={resourceLinks} />
+
+          <div>
+            <h2 className={styles.columnTitle}>Let&apos;s Connect</h2>
             <div className={styles.social}>
-              <a href={SITE.social.twitter} className={styles.socialLink} aria-label="Twitter">
-                Twitter
-              </a>
-              <a href={SITE.social.linkedin} className={styles.socialLink} aria-label="LinkedIn">
-                LinkedIn
-              </a>
-              <a href={SITE.social.instagram} className={styles.socialLink} aria-label="Instagram">
-                Instagram
-              </a>
+              <a href={SITE.social.instagram} aria-label="Instagram"><AtSign size={16} /></a>
+              <a href={SITE.social.linkedin} aria-label="LinkedIn"><LinkIcon size={16} /></a>
+              <a href={SITE.social.twitter} aria-label="X"><X size={16} /></a>
+              <a href="#" aria-label="Website"><Globe size={16} /></a>
             </div>
           </div>
+        </div>
+
+        <div className={styles.bottom}>
+          <p>&copy; {new Date().getFullYear()} Krivoxx. All rights reserved.</p>
+          <p>Made with passion</p>
         </div>
       </Container>
     </footer>
   );
+}
+
+function FooterColumn({ title, links }) {
+  return (
+    <div>
+      <h2 className={styles.columnTitle}>{title}</h2>
+      <ul className={styles.links}>
+        {links.map((link) => (
+          <li key={typeof link === 'string' ? link : link.href}>
+            <a href={getFooterHref(title, link)}>
+              {typeof link === 'string' ? link : link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function getFooterHref(title, link) {
+  if (typeof link !== 'string') return link.href;
+  if (title === 'Services') return `/contact?service=${encodeURIComponent(link)}`;
+  return '/contact';
 }

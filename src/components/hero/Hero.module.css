@@ -1,28 +1,30 @@
 .hero {
   position: relative;
-  padding: 160px 0 96px;
-  background: var(--color-bg);
+  min-height: 850px;
+  padding: 190px 0 120px;
+  background: transparent;
   overflow: hidden;
 }
 
 .inner {
-  position: relative;
-  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   gap: 24px;
-  max-width: 800px;
+  max-width: 700px;
   margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
 
 .title {
-  font-size: 72px;
-  font-weight: 800;
-  line-height: 0.95;
-  letter-spacing: -0.04em;
+  font-size: 92px;
+  font-weight: 950;
+  line-height: 0.9;
+  letter-spacing: 0;
   color: var(--color-text-primary);
+  text-transform: uppercase;
 }
 
 .highlight {
@@ -31,75 +33,128 @@
 }
 
 .description {
-  font-size: 18px;
-  line-height: 1.6;
+  font-size: 17px;
+  line-height: 1.65;
   color: var(--color-text-secondary);
-  max-width: 600px;
+  max-width: 500px;
 }
 
 .actions {
   display: flex;
-  gap: 16px;
+  gap: 18px;
   margin-top: 8px;
 }
 
-.stats {
-  display: flex;
-  gap: 48px;
-  margin-top: 48px;
-  padding-top: 48px;
-  border-top: 1px solid var(--color-border);
-  width: 100%;
-  justify-content: center;
+.watch {
+  padding-left: 14px;
 }
 
-.stat {
+.scrollHint {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 18px;
+  margin-top: 28px;
+  color: var(--color-text-secondary);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  transition: color 180ms ease;
 }
 
-.statNumber {
-  font-size: 32px;
-  font-weight: 700;
-  color: var(--color-text-primary);
-  letter-spacing: -0.02em;
+.scrollHint span {
+  color: var(--color-primary);
+  font-size: 24px;
+  letter-spacing: 0;
 }
 
-.statLabel {
-  font-size: 14px;
-  color: var(--color-text-muted);
-  font-weight: 500;
+.scrollHint:hover {
+  color: var(--color-primary);
+}
+
+.trailLayer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.trailBox {
+  position: absolute;
+  display: block;
+  border-radius: 1px;
+  background: var(--color-primary);
+  box-shadow: 0 0 12px rgba(69, 28, 255, 0.16);
+  animation: trailBoxFade 920ms ease-out forwards;
+}
+
+.rings {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  border: 1px solid rgba(69, 28, 255, 0.18);
+  box-shadow:
+    0 0 0 18px rgba(69, 28, 255, 0.04),
+    0 0 0 38px rgba(69, 28, 255, 0.035),
+    0 0 0 60px rgba(69, 28, 255, 0.03),
+    0 0 0 86px rgba(69, 28, 255, 0.025);
+}
+
+.ringsLeft {
+  left: -395px;
+  bottom: 0;
+}
+
+.ringsRight {
+  right: -405px;
+  top: 455px;
 }
 
 @media (max-width: 768px) {
   .hero {
-    padding: 120px 0 64px;
+    min-height: 760px;
+    padding: 126px 0 70px;
   }
 
   .title {
-    font-size: 44px;
+    font-size: 52px;
   }
 
   .actions {
     flex-direction: column;
-    width: 100%;
+    width: min(100%, 320px);
   }
 
-  .stats {
-    flex-direction: column;
-    gap: 24px;
-    align-items: center;
+  .ringsLeft {
+    display: none;
+  }
+
+  .trailLayer {
+    display: none;
+  }
+}
+
+@keyframes trailBoxFade {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.35);
+  }
+  16% {
+    opacity: 0.72;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--trail-drift-x, 24px), var(--trail-drift-y, -24px)) scale(0.18);
   }
 }
 
 @media (max-width: 480px) {
   .title {
-    font-size: 36px;
+    font-size: 42px;
   }
 
   .description {
-    font-size: 16px;
+    font-size: 14px;
   }
 }

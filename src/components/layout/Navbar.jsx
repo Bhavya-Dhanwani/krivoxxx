@@ -1,9 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import Container from '@/components/ui/Container';
 import Button from '@/components/ui/Button';
 import { navLinks } from '@/data/navigation';
@@ -13,51 +15,48 @@ import styles from './Navbar.module.css';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
-  // Track scroll position for styling
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  if (pathname === '/contact') return null;
 
-  // Close menu on route change (anchor click)
   const handleNavClick = () => setIsOpen(false);
 
   return (
-    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
+    <header className={styles.header}>
       <Container>
         <nav className={styles.nav}>
-          <a href="#hero" className={styles.logoWrap}>
+          <Link href="/" className={styles.logoWrap} aria-label="Krivoxx home">
             <Image
               src={logoSrc}
               alt="Krivoxx"
               className={styles.logoImg}
               priority
             />
-            <span className={styles.logoText}>{SITE.name}</span>
-          </a>
+            <span className={styles.logoBlock}>
+              <span className={styles.logoText}>
+                Krivo<span>xx</span>
+              </span>
+              <span className={styles.logoSub}>Digital Marketing Agency</span>
+            </span>
+          </Link>
 
-          {/* Desktop links */}
           <ul className={styles.links}>
-            {navLinks.map((link) => (
+            {navLinks.slice(0, 4).map((link) => (
               <li key={link.href}>
                 <a href={link.href} className={styles.link}>
                   <span className={styles.linkInner}>{link.label}</span>
+                  {link.label === 'Services' && <ChevronDown size={14} />}
                 </a>
               </li>
             ))}
           </ul>
 
-          {/* Desktop CTA */}
           <div className={styles.desktopCta}>
-            <Button href="#contact" size="sm">
-              Get in Touch
+            <Button href="/contact" size="sm" showArrow>
+              Let&apos;s Talk
             </Button>
           </div>
 
-          {/* Mobile toggle */}
           <button
             className={styles.toggle}
             onClick={() => setIsOpen(!isOpen)}
@@ -68,7 +67,6 @@ export default function Navbar() {
         </nav>
       </Container>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -92,8 +90,8 @@ export default function Navbar() {
                   </li>
                 ))}
               </ul>
-              <Button href="#contact" className={styles.mobileCta} onClick={handleNavClick}>
-                Get in Touch
+              <Button href="/contact" className={styles.mobileCta} onClick={handleNavClick} showArrow>
+                Let&apos;s Talk
               </Button>
             </Container>
           </motion.div>

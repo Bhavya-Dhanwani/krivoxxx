@@ -4,31 +4,31 @@
 
 /* ----- Color System ----- */
 :root {
-  --color-primary: #4F2DFF;
-  --color-primary-hover: #4325E8;
-  --color-primary-dark: #3217C8;
+  --color-primary: #451cff;
+  --color-primary-hover: #3511df;
+  --color-primary-dark: #2500b8;
 
-  --color-text-primary: #0F0F13;
-  --color-text-secondary: #676B7C;
-  --color-text-muted: #A2A5B8;
+  --color-text-primary: #07070d;
+  --color-text-secondary: #45496b;
+  --color-text-muted: #8388a6;
 
   --color-bg: #FFFFFF;
-  --color-section-bg: #FAFAFC;
-  --color-border: #ECECF3;
+  --color-section-bg: #fbfaff;
+  --color-border: #dedcf0;
   --color-card-bg: #FFFFFF;
-  --color-light-purple: #F4F1FF;
-  --color-ultra-light-purple: #F8F7FF;
+  --color-light-purple: #f1edff;
+  --color-ultra-light-purple: #faf8ff;
 
   /* Shadows */
-  --shadow-small: 0 8px 24px rgba(0, 0, 0, 0.04);
-  --shadow-medium: 0 12px 32px rgba(0, 0, 0, 0.06);
-  --shadow-purple-glow: 0 10px 40px rgba(79, 45, 255, 0.25);
+  --shadow-small: 0 8px 24px rgba(38, 18, 119, 0.06);
+  --shadow-medium: 0 20px 55px rgba(45, 24, 123, 0.1);
+  --shadow-purple-glow: 0 14px 30px rgba(69, 28, 255, 0.28);
 
   /* Border Radius */
   --radius-button: 999px;
-  --radius-input: 16px;
-  --radius-card: 24px;
-  --radius-section-cta: 32px;
+  --radius-input: 10px;
+  --radius-card: 8px;
+  --radius-section-cta: 8px;
 
   /* Spacing (8px system) */
   --space-1: 4px;
@@ -74,7 +74,9 @@ body {
   font-size: 16px;
   line-height: 1.5;
   color: var(--color-text-primary);
-  background: var(--color-bg);
+  background:
+    radial-gradient(circle at 50% 17%, rgba(69, 28, 255, 0.08), transparent 32rem),
+    linear-gradient(180deg, #fff 0%, #fbfaff 48%, #fff 100%);
   overscroll-behavior: none;
 }
 

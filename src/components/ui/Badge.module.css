@@ -2,16 +2,27 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 800;
   padding: 6px 14px;
   border-radius: 999px;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
+  text-transform: uppercase;
 }
 
 .default {
   color: var(--color-primary);
-  background: var(--color-light-purple);
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(69, 28, 255, 0.22);
+}
+
+.default::before,
+.outline::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-primary);
 }
 
 .outline {

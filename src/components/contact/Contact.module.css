@@ -1,98 +1,289 @@
-.inner {
-  display: flex;
-  flex-direction: column;
+.contact {
+  position: relative;
+  overflow: hidden;
+  padding: 118px 0;
+  background: transparent;
+}
+
+.standalone {
+  min-height: 100vh;
+  padding: 52px 0 92px;
+}
+
+.backLink {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
   align-items: center;
+  gap: 14px;
+  color: var(--color-text-primary);
+  font-size: 15px;
+  font-weight: 900;
+  transition: color 180ms ease, box-shadow 180ms ease;
+}
+
+.backLink:hover {
+  color: var(--color-primary);
 }
 
 .header {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 86px auto 58px;
   text-align: center;
-  margin-bottom: 48px;
-  max-width: 540px;
 }
 
-.heading {
-  font-size: 40px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
+.contact:not(.standalone) .header {
+  margin-top: 0;
+}
+
+.header h1 {
+  margin-top: 34px;
+  font-size: 70px;
+  line-height: 0.98;
+  font-weight: 950;
+  letter-spacing: 0;
   color: var(--color-text-primary);
-  margin-bottom: 16px;
 }
 
-.subheading {
-  font-size: 17px;
+.header h1 span {
+  display: block;
+  color: var(--color-primary);
+}
+
+.header p {
+  max-width: 420px;
+  margin: 32px auto 0;
   color: var(--color-text-secondary);
+  font-size: 20px;
   line-height: 1.6;
 }
 
 .form {
-  width: 100%;
-  max-width: 600px;
+  position: relative;
+  z-index: 1;
+  width: min(100%, 880px);
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 30px;
+  padding: 48px;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(69, 28, 255, 0.08);
+  border-radius: 18px;
+  box-shadow: 0 28px 70px rgba(40, 31, 84, 0.12);
 }
 
 .row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  gap: 30px;
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 12px;
 }
 
 .label {
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 900;
   color: var(--color-text-primary);
+}
+
+.label em {
+  font-style: normal;
+  color: var(--color-text-secondary);
+  font-weight: 500;
 }
 
 .input,
 .textarea {
-  padding: 14px 18px;
+  width: 100%;
+  padding: 16px 20px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-input);
   font-size: 16px;
   color: var(--color-text-primary);
-  background: var(--color-bg);
-  transition: border-color 200ms ease, box-shadow 200ms ease;
+  background: rgba(255, 255, 255, 0.72);
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
   outline: none;
 }
 
 .input::placeholder,
 .textarea::placeholder {
-  color: var(--color-text-muted);
+  color: #777d9e;
 }
 
 .input:focus,
 .textarea:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(79, 45, 255, 0.1);
+  box-shadow: 0 0 0 4px rgba(69, 28, 255, 0.1);
 }
 
 .inputError {
-  border-color: #e53e3e;
+  border-color: #d73232;
 }
 
 .textarea {
   resize: vertical;
-  min-height: 120px;
+  min-height: 138px;
+  line-height: 1.65;
 }
 
 .error {
   font-size: 13px;
-  color: #e53e3e;
+  color: #d73232;
+}
+
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.option,
+.budget {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+  padding: 12px 22px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-input);
+  background: rgba(255, 255, 255, 0.75);
+  color: var(--color-text-primary);
+  font-size: 14px;
+  font-weight: 900;
+  transition: border-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+}
+
+.option svg {
+  color: var(--color-primary);
+}
+
+.option:hover,
+.budget:hover,
+.activeOption,
+.activeBudget {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  box-shadow: 0 8px 24px rgba(69, 28, 255, 0.08);
+}
+
+.budgetGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.budget {
+  justify-content: center;
 }
 
 .submit {
-  align-self: flex-start;
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  border-radius: 14px;
+  background: var(--color-primary);
+  color: white;
+  font-size: 18px;
+  font-weight: 900;
+  box-shadow: var(--shadow-purple-glow);
+  transition: background 180ms ease, box-shadow 180ms ease;
+}
+
+.submit:hover {
+  background: var(--color-primary-hover);
+  box-shadow: 0 20px 42px rgba(69, 28, 255, 0.36);
+}
+
+.submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.submit span {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: white;
+  color: var(--color-primary);
+  position: absolute;
+  right: 60px;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.submit span svg {
+  transition: transform 220ms ease;
+}
+
+.submit:hover span {
+  box-shadow: 0 10px 22px rgba(29, 10, 108, 0.18);
+  transform: scale(1.06);
+}
+
+.submit:hover span svg {
+  transform: rotate(-35deg);
+}
+
+.privacy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--color-text-secondary);
+  font-size: 15px;
 }
 
 .spinner {
   animation: spin 1s linear infinite;
+}
+
+.dots {
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  opacity: 0.45;
+  background-image: radial-gradient(circle, var(--color-primary) 2px, transparent 2px);
+  background-size: 27px 27px;
+  mask-image: radial-gradient(circle, #000 0 42%, transparent 72%);
+}
+
+.dotsLeft {
+  left: -8px;
+  top: 205px;
+}
+
+.dotsRight {
+  right: -12px;
+  top: 420px;
+}
+
+.ring {
+  position: absolute;
+  width: 650px;
+  height: 650px;
+  border-radius: 50%;
+  border: 2px dashed rgba(69, 28, 255, 0.18);
+}
+
+.ringLeft {
+  left: -560px;
+  bottom: 130px;
+}
+
+.ringRight {
+  right: -560px;
+  bottom: 130px;
 }
 
 @keyframes spin {
@@ -104,16 +295,40 @@
   }
 }
 
-@media (max-width: 600px) {
-  .row {
+@media (max-width: 760px) {
+  .standalone {
+    padding-top: 26px;
+  }
+
+  .header {
+    margin-top: 70px;
+  }
+
+  .header h1 {
+    font-size: 42px;
+  }
+
+  .header p {
+    font-size: 16px;
+  }
+
+  .form {
+    padding: 24px;
+  }
+
+  .row,
+  .serviceGrid,
+  .budgetGrid {
     grid-template-columns: 1fr;
   }
 
-  .heading {
-    font-size: 32px;
+  .submit span {
+    position: static;
   }
 
-  .submit {
-    width: 100%;
+  .dotsRight,
+  .ringLeft,
+  .ringRight {
+    display: none;
   }
 }

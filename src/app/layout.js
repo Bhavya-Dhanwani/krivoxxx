@@ -11,11 +11,11 @@ const geistSans = Geist({
 });
 
 export const metadata = {
-  title: 'Krivoxx — Digital Agency',
+  title: 'Krivoxx - Digital Agency',
   description:
     'A premium digital marketing agency specializing in strategy, design, and growth. We build brands that dominate.',
   openGraph: {
-    title: 'Krivoxx — Digital Agency',
+    title: 'Krivoxx - Digital Agency',
     description:
       'A premium digital marketing agency specializing in strategy, design, and growth.',
     type: 'website',

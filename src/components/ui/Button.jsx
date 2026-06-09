@@ -19,7 +19,6 @@ export default function Button({
     ? { href, className: `${styles.button} ${styles[variant]} ${styles[size]} ${className}` }
     : {
         className: `${styles.button} ${styles[variant]} ${styles[size]} ${className}`,
-        whileHover: { y: -2 },
         whileTap: { scale: 0.98 },
         ...props,
       };
