@@ -1,0 +1,15 @@
+.section {
+  padding: var(--space-11) 0;
+}
+
+.default {
+  background: var(--color-bg);
+}
+
+.muted {
+  background: var(--color-section-bg);
+}
+
+.light {
+  background: var(--color-ultra-light-purple);
+}
