@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import Image from 'next/image';
@@ -15,14 +15,22 @@ import styles from './Navbar.module.css';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [stuck, setStuck] = useState(false);
   const pathname = usePathname();
 
   if (pathname === '/contact') return null;
 
+  useEffect(() => {
+    const onScroll = () => setStuck(window.scrollY > 0);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   const handleNavClick = () => setIsOpen(false);
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${stuck ? styles.stuck : ''}`}>
       <Container>
         <nav className={styles.nav}>
           <Link href="/" className={styles.logoWrap} aria-label="Krivoxx home">

@@ -9,7 +9,7 @@ import { SITE } from '@/constants';
 import logoSrc from '@/assets/images/logo.png';
 import styles from './Footer.module.css';
 
-const companyLinks = ['About Us', 'Our Process', 'Blog', 'Careers'];
+const companyLinks = ['Home', 'Services', 'Our Process', 'Contact'];
 const serviceLinks = ['Ads Campaigns', 'Website Development', 'Video Production', 'Brand Strategy & Design'];
 const resourceLinks = [
   { label: 'Privacy Policy', href: '/privacy-policy' },
@@ -80,8 +80,16 @@ function FooterColumn({ title, links }) {
   );
 }
 
+const sectionMap = {
+  'Home': '#hero',
+  'Services': '#services',
+  'Our Process': '#process',
+  'Contact': '#contact',
+};
+
 function getFooterHref(title, link) {
   if (typeof link !== 'string') return link.href;
+  if (title === 'Company') return `/${sectionMap[link]}`;
   if (title === 'Services') return `/contact?service=${encodeURIComponent(link)}`;
   return '/contact';
 }
